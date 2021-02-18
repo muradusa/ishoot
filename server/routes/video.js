@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
@@ -25,6 +24,7 @@ var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
   console.log(req.file);
+
   console.log(process.env.AWS_BUCKET_NAME);
 
   let s3bucket = new AWS.S3({
@@ -34,7 +34,6 @@ router.post("/uploadfiles", upload, (req, res) => {
   });
 
   var params = {
-    // Bucket: "youtubebucket-uploads",
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: req.file.originalname,
     Body: req.file.buffer,
