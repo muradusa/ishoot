@@ -25,10 +25,7 @@ var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
   console.log(req.file);
-
-  const s3FileURL = "https://youtubebucket-uploads.s3-us-west-1.amazonaws.com/";
-
-  // // process.env.AWS_Uploaded_File_URL_LINK;
+  console.log(process.env.AWS_BUCKET_NAME);
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -37,8 +34,8 @@ router.post("/uploadfiles", upload, (req, res) => {
   });
 
   var params = {
-    Bucket: "youtubebucket-uploads",
-    //   Bucket: process.env.AWS_BUCKET_NAME,
+    // Bucket: "youtubebucket-uploads",
+    Bucket: process.env.AWS_BUCKET_NAME,
     Key: req.file.originalname,
     Body: req.file.buffer,
     ContentType: req.file.mimetype,
@@ -52,7 +49,7 @@ router.post("/uploadfiles", upload, (req, res) => {
       // res.send(data);
       //   console.log(data);
       const presignedPutUrl = s3bucket.getSignedUrl("putObject", {
-        Bucket: "youtubebucket-uploads",
+        Bucket: process.env.AWS_BUCKET_NAME,
         Key: params.Key, //filename
         Expires: 5 * 60, //time to expire in seconds - 5 min
       });
