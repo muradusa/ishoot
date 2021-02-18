@@ -45,8 +45,6 @@ router.post("/uploadfiles", upload, (req, res) => {
     if (err) {
       res.status(500).json({ error: true, Message: err });
     } else {
-      // res.send(data);
-      //   console.log(data);
       const presignedPutUrl = s3bucket.getSignedUrl("putObject", {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: params.Key, //filename
@@ -57,8 +55,6 @@ router.post("/uploadfiles", upload, (req, res) => {
       res.send({ fileUrl: url });
     }
   });
-
-  //   res.send(fileLink);
 });
 
 router.post("/uploadVideo", (req, res) => {
