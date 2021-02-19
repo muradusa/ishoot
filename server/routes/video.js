@@ -52,6 +52,13 @@ router.post("/uploadfiles", upload, (req, res) => {
       });
       const url = presignedPutUrl.split("?")[0];
 
+      const thumbnailUrl = s3bucket.getSignedUrl("getObject", {
+        Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
+        Key: params.Key,
+      });
+      const urlThumb = thumbnailUrl;
+      console.log(urlThumb);
+
       res.send({ fileUrl: url });
     }
   });

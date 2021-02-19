@@ -21,6 +21,7 @@ function LandingPage() {
   }, []);
 
   const renderCards = Videos.map((video, index) => {
+    console.log(video);
     // var minutes = Math.floor(video.duration / 60);
     // var seconds = Math.floor(video.duration - minutes * 60);
 
@@ -45,7 +46,11 @@ function LandingPage() {
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <Title level={2}> Recommended </Title>
       <hr />
-
+      <img
+        src="https://youtubebucket-thumbnails.s3-us-west-1.amazonaws.com/SampleVideo_1280x720_S3_v20-0.jpg"
+        alt="alt"
+        style={{ height: "300px", width: "300px", objectFit: "contain" }}
+      />
       <Row gutter={16}>{renderCards}</Row>
     </div>
   );
