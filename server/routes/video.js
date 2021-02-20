@@ -56,10 +56,16 @@ router.post("/uploadfiles", upload, (req, res) => {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
         Key: params.Key,
       });
-      const urlThumb = thumbnailUrl;
+      const urlThumb = thumbnailUrl.split(".mp4")[0];
+      const urlEnding = "-0.jpg";
       console.log(urlThumb);
+      const photoUrl = urlThumb.concat(urlEnding);
+      console.log(photoUrl);
 
-      res.send({ fileUrl: url });
+      res.send({
+        fileUrl: url,
+        thumbUrl: photoUrl,
+      });
     }
   });
 });
@@ -70,6 +76,7 @@ router.post("/uploadVideo", (req, res) => {
     title: req.body.title,
     description: req.body.description,
     fileLink: req.body.videoURL,
+    thumbLink: req.body.thumbURL,
   });
   video.save((err, video) => {
     if (err) return res.status(400).json({ success: false, err });

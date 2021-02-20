@@ -34,10 +34,19 @@ function LandingPage() {
           title={video.title}
         />
         <span>{video.writer.name} </span>
+        <div>{video.description} </div>
         <br />
-        <video src={video.fileLink} controls height="400" width="400"></video>
+        <div className="video__container" style={{ backgroundColor: "yellow" }}>
+          <video
+            src={video.fileLink}
+            controls
+            height="400px"
+            width="100%"
+          ></video>
+        </div>
         <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
         <span> {moment(video.createdAt).format("MMM Do YY")} </span>
+        <br />
       </Col>
     );
   });
@@ -46,11 +55,7 @@ function LandingPage() {
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <Title level={2}> Recommended </Title>
       <hr />
-      <img
-        src="https://youtubebucket-thumbnails.s3-us-west-1.amazonaws.com/SampleVideo_1280x720_S3_v20-0.jpg"
-        alt="alt"
-        style={{ height: "300px", width: "300px", objectFit: "contain" }}
-      />
+
       <Row gutter={16}>{renderCards}</Row>
     </div>
   );

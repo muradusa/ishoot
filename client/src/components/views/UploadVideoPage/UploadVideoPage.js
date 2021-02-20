@@ -13,7 +13,7 @@ function UploadVideoPage(props) {
   const [title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [videoLink, setVideoLink] = useState("");
-  let video;
+  const [thumbLink, setThumbLink] = useState("");
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -21,6 +21,19 @@ function UploadVideoPage(props) {
 
   const handleChangeDescription = (event) => {
     setDescription(event.currentTarget.value);
+  };
+
+  const onDrop = (files) => {
+    let formData = new FormData();
+    formData.append("file", files[0]);
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+
+    axios.post("/api/video/uploadfiles", formData, config).then((res) => {
+      setVideoLink(res.data.fileUrl);
+      setThumbLink(res.data.thumbUrl);
+    });
   };
 
   const onSubmit = (event) => {
@@ -35,8 +48,8 @@ function UploadVideoPage(props) {
       title: title,
       description: Description,
       videoURL: videoLink,
+      thumbURL: thumbLink,
     };
-    console.log(`video url is ${video}`);
 
     axios.post("/api/video/uploadVideo", variables).then((response) => {
       if (response.data.success) {
@@ -45,20 +58,6 @@ function UploadVideoPage(props) {
       } else {
         alert("Failed to upload video");
       }
-    });
-  };
-
-  const onDrop = (files) => {
-    let formData = new FormData();
-    formData.append("file", files[0]);
-    const config = {
-      header: { "content-type": "multipart/form-data" },
-    };
-
-    axios.post("/api/video/uploadfiles", formData, config).then((res) => {
-      const video = res.data.fileUrl;
-      setVideoLink(video);
-      console.log(videoLink);
     });
   };
 
@@ -89,11 +88,17 @@ function UploadVideoPage(props) {
               </div>
             )}
           </Dropzone>
-          {/* {Thumbnail !== "" && (
+          {thumbLink !== "" ? (
             <div>
-              <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" />
+              <img
+                src={thumbLink}
+                style={{ height: "300px", width: "300px" }}
+                alt="thumbImage"
+              />
             </div>
-          )} */}
+          ) : (
+            <div> </div>
+          )}
         </div>
         <br />
         <br />

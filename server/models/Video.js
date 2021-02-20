@@ -17,9 +17,7 @@ const videoSchema = mongoose.Schema(
     // privacy: {
     //   type: Number,
     // },
-    // filePath : {
-    //     type: String,
-    // },
+
     // catogory: String,
     // views: {
     //   type: Number,
@@ -29,16 +27,13 @@ const videoSchema = mongoose.Schema(
       type: String,
       maxlength: 500,
     },
-    // videoPath: {
-    //   type: String,
-    // },
 
     // duration :{
     //     type: String
     // },
-    // thumbnail: {
-    //     type: String
-    // }
+    thumbLink: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
