@@ -8,12 +8,12 @@ const path = require("path");
 const { Video } = require("../models/Video");
 
 var storage = multer.memoryStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${file.originalname}-${path.extname(file.originalname)}`);
-  },
+  // destination: function (req, file, cb) {
+  //   cb(null, "/");
+  // },
+  // filename: function (req, file, cb) {
+  //   cb(null, `${newName}-${path.extname(file.originalname)}`);
+  // },
 });
 
 var upload = multer({ storage: storage }).single("file");
@@ -24,8 +24,7 @@ var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
   console.log(req.file);
-
-  console.log(process.env.AWS_BUCKET_NAME);
+  console.log();
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -33,9 +32,27 @@ router.post("/uploadfiles", upload, (req, res) => {
     region: process.env.AWS_REGION,
   });
 
+  const getRandomString = (len) => {
+    const charset =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let result = "";
+
+    for (let i = len; i > 0; --i) {
+      result += charset[Math.floor(Math.random() * charset.length)];
+    }
+
+    return result;
+  };
+  const random = getRandomString(10);
+  const original = req.file.originalname.split(".mp4")[0];
+  const newName = original.concat(random);
+  const newNameExt = ".mp4";
+  const finalFileName = newName.concat(newNameExt);
+  console.log(finalFileName);
+
   var params = {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: req.file.originalname,
+    Key: finalFileName,
     Body: req.file.buffer,
     ContentType: req.file.mimetype,
     ACL: "public-read",
@@ -56,9 +73,9 @@ router.post("/uploadfiles", upload, (req, res) => {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
         Key: params.Key,
       });
+      console.log(thumbnailUrl);
       const urlThumb = thumbnailUrl.split(".mp4")[0];
       const urlEnding = "-0.jpg";
-      console.log(urlThumb);
       const photoUrl = urlThumb.concat(urlEnding);
       console.log(photoUrl);
 

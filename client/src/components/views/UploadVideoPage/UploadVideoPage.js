@@ -9,11 +9,10 @@ const { TextArea } = Input;
 
 function UploadVideoPage(props) {
   const user = useSelector((state) => state.user);
-
   const [title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [videoLink, setVideoLink] = useState("");
-  const [thumbLink, setThumbLink] = useState("");
+  const [videoLink, setVideoLink] = useState(null);
+  const [thumbLink, setThumbLink] = useState(null);
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -31,6 +30,7 @@ function UploadVideoPage(props) {
     };
 
     axios.post("/api/video/uploadfiles", formData, config).then((res) => {
+      console.log(res.data);
       setVideoLink(res.data.fileUrl);
       setThumbLink(res.data.thumbUrl);
     });
@@ -38,11 +38,9 @@ function UploadVideoPage(props) {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
     if (user.userData && !user.userData.isAuth) {
       return alert("Please Log in First");
     }
-
     const variables = {
       writer: user.userData._id,
       title: title,
@@ -88,16 +86,12 @@ function UploadVideoPage(props) {
               </div>
             )}
           </Dropzone>
-          {thumbLink !== "" ? (
-            <div>
-              <img
-                src={thumbLink}
-                style={{ height: "300px", width: "300px" }}
-                alt="thumbImage"
-              />
-            </div>
-          ) : (
-            <div> </div>
+          {thumbLink !== null && (
+            <img
+              src={thumbLink}
+              style={{ height: "300px", width: "300px" }}
+              alt="Video Uploaded"
+            />
           )}
         </div>
         <br />
