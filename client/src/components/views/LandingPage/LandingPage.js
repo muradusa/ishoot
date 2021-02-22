@@ -22,10 +22,6 @@ function LandingPage() {
     });
   }, []);
 
-  const getDetailedVideoPage = () => {
-    history.push("/detailedvideopage");
-  };
-
   const renderCards = Videos.map((video, index) => {
     console.log(video);
     // var minutes = Math.floor(video.duration / 60);
@@ -43,13 +39,9 @@ function LandingPage() {
         <div>{video.description} </div>
         <br />
         <div className="video__container" style={{ backgroundColor: "yellow" }}>
-          <img
-            src={video.thumbLink}
-            onClick={getDetailedVideoPage}
-            height="400px"
-            width="100%"
-            alt=""
-          />
+          <a href={`/video/${video._id}`}>
+            <img src={video.thumbLink} height="400px" width="100%" alt="" />
+          </a>
         </div>
         <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
         <span> {moment(video.createdAt).format("MMM Do YY")} </span>

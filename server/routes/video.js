@@ -7,20 +7,9 @@ const path = require("path");
 
 const { Video } = require("../models/Video");
 
-var storage = multer.memoryStorage({
-  // destination: function (req, file, cb) {
-  //   cb(null, "/");
-  // },
-  // filename: function (req, file, cb) {
-  //   cb(null, `${newName}-${path.extname(file.originalname)}`);
-  // },
-});
+var storage = multer.memoryStorage({});
 
 var upload = multer({ storage: storage }).single("file");
-
-//=================================
-//             Video
-//=================================
 
 router.post("/uploadfiles", upload, (req, res) => {
   console.log(req.file);
@@ -103,14 +92,14 @@ router.post("/uploadVideo", (req, res) => {
   });
 });
 
-// router.post("/getVideo", (req, res) => {
-//   Video.findOne({ _id: req.body.videoId })
-//     .populate("writer")
-//     .exec((err, video) => {
-//       if (err) return res.status(400).send(err);
-//       res.status(200).json({ success: true, video });
-//     });
-// });
+router.post("/getVideo", (req, res) => {
+  Video.findOne({ _id: req.body.videoId })
+    .populate("writer")
+    .exec((err, video) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, video });
+    });
+});
 
 router.get("/getVideos", (req, res) => {
   Video.find()

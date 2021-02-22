@@ -25,16 +25,15 @@ function App() {
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route
             exact
-            path="/detailedvideopage"
-            component={Auth(DetailedVideoPage, true)}
+            path="/video/upload"
+            component={Auth(UploadVideoPage, true)}
           />
           <Route
             exact
-            path="/video/page"
-            component={Auth(UploadVideoPage, true)}
+            path="/video/:videoId"
+            component={Auth(DetailedVideoPage, null)}
           />
-          {/* <Route exact path="/video/:videoId" component={Auth(DetailVideoPage, null)} />
-          <Route exact path="/subscription" component={Auth(SubscriptionPage, null)} /> */}
+          {/* <Route exact path="/subscription" component={Auth(SubscriptionPage, null)} /> */}
         </Switch>
       </div>
       <Footer />
