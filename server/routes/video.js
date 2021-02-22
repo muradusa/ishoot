@@ -12,8 +12,7 @@ var storage = multer.memoryStorage({});
 var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
-  console.log(req.file);
-  console.log();
+  // console.log(req.file);
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -37,7 +36,7 @@ router.post("/uploadfiles", upload, (req, res) => {
   const newName = original.concat(random);
   const newNameExt = ".mp4";
   const finalFileName = newName.concat(newNameExt);
-  console.log(finalFileName);
+  // console.log(finalFileName);
 
   var params = {
     Bucket: process.env.AWS_BUCKET_NAME,
@@ -62,11 +61,11 @@ router.post("/uploadfiles", upload, (req, res) => {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
         Key: params.Key,
       });
-      console.log(thumbnailUrl);
+      // console.log(thumbnailUrl);
       const urlThumb = thumbnailUrl.split(".mp4")[0];
       const urlEnding = "-0.jpg";
       const photoUrl = urlThumb.concat(urlEnding);
-      console.log(photoUrl);
+      // console.log(photoUrl);
 
       res.send({
         fileUrl: url,
@@ -107,7 +106,7 @@ router.get("/getVideos", (req, res) => {
     .exec((err, videos) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videos });
-      console.log(videos);
+      // console.log(videos);
     });
 });
 
