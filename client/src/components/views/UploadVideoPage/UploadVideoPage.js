@@ -88,8 +88,9 @@ function UploadVideoPage(props) {
           </Dropzone>
           {thumbLink !== null && (
             <img
-              src={thumbLink}
-              style={{ height: "300px", width: "300px" }}
+              src="https://shatter-box.com/wp-content/uploads/2017/10/xcode_app_upload_success.png"
+              // src={thumbLink}
+              style={{ height: "300px", objectFit: "contain" }}
               alt="Video Uploaded"
             />
           )}

@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Card, Avatar, Col, Typography, Row } from "antd";
 import axios from "axios";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 const { Meta } = Card;
 
 function LandingPage() {
   const [Videos, setVideos] = useState([]);
+  let history = useHistory();
 
   useEffect(() => {
     axios.get("/api/video/getVideos").then((response) => {
@@ -19,6 +21,10 @@ function LandingPage() {
       }
     });
   }, []);
+
+  const getDetailedVideoPage = () => {
+    history.push("/detailedvideopage");
+  };
 
   const renderCards = Videos.map((video, index) => {
     console.log(video);
@@ -37,12 +43,13 @@ function LandingPage() {
         <div>{video.description} </div>
         <br />
         <div className="video__container" style={{ backgroundColor: "yellow" }}>
-          <video
-            src={video.fileLink}
-            controls
+          <img
+            src={video.thumbLink}
+            onClick={getDetailedVideoPage}
             height="400px"
             width="100%"
-          ></video>
+            alt=""
+          />
         </div>
         <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
         <span> {moment(video.createdAt).format("MMM Do YY")} </span>
