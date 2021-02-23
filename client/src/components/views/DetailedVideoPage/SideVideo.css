@@ -1,0 +1,13 @@
+.sideVideo {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: rgb(187, 201, 243);
+}
+
+.sideVideo img {
+  height: 280px;
+  width: 100%;
+  object-fit: contain;
+}

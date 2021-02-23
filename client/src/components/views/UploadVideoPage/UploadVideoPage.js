@@ -7,12 +7,15 @@ import { useSelector } from "react-redux";
 const { Title } = Typography;
 const { TextArea } = Input;
 
+let thumb;
+
 function UploadVideoPage(props) {
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [videoLink, setVideoLink] = useState(null);
   const [thumbLink, setThumbLink] = useState(null);
+  const [thumb, setThumb] = useState(null);
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -89,7 +92,7 @@ function UploadVideoPage(props) {
           {thumbLink !== null && (
             <img
               src="https://shatter-box.com/wp-content/uploads/2017/10/xcode_app_upload_success.png"
-              // src={thumbLink}
+              // src={`${thumbLink}`}
               style={{ height: "300px", objectFit: "contain" }}
               alt="Video Uploaded"
             />

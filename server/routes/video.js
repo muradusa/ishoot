@@ -65,7 +65,8 @@ router.post("/uploadfiles", upload, (req, res) => {
       const urlThumb = thumbnailUrl.split(".mp4")[0];
       const urlEnding = "-0.jpg";
       const photoUrl = urlThumb.concat(urlEnding);
-      // console.log(photoUrl);
+
+      console.log(photoUrl);
 
       res.send({
         fileUrl: url,
@@ -107,6 +108,15 @@ router.get("/getVideos", (req, res) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videos });
       // console.log(videos);
+    });
+});
+
+router.post("/sideVideo", (req, res) => {
+  Video.find({ writer: req.body.value })
+    .populate("writer")
+    .exec((err, videos) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, videos });
     });
 });
 

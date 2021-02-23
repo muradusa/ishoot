@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SideVideo from "./SideVideo";
 
 function DetailedVideoPage(props) {
   const videoId = props.match.params.videoId;
@@ -14,7 +15,7 @@ function DetailedVideoPage(props) {
     axios.post("/api/video/getVideo", videoVariable).then((response) => {
       if (response.data.success) {
         setDetailedVideo(response.data.video);
-        console.log(response);
+        // console.log(response);
       } else {
         alert("Failed to get video info");
       }
@@ -60,10 +61,7 @@ function DetailedVideoPage(props) {
         className="detailedVideoPage__side"
         style={{ display: "flex", flex: "0.2", flexDirection: "column" }}
       >
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
+        <SideVideo writer={detailedVideo.writer} />
       </div>
     </div>
   );
