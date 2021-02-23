@@ -22,19 +22,48 @@ function DetailedVideoPage(props) {
   }, []);
 
   return (
-    <div className="detailedVideoPage">
-      <div className="detailedVideoPage__video">
-        <video
-          src={detailedVideo.fileLink}
-          controls
-          height="400px"
-          width="100%"
-        ></video>
-        <div className="detailedVideoPage__videoInfo">
-          <p>{detailedVideo.title}</p>
-          <p>{detailedVideo.description}</p>
-          <p>{detailedVideo.writer?.email}</p>
+    <div className="detailedVideoPage" style={{ display: "flex" }}>
+      <div
+        className="detailedVideoPage__video"
+        style={{ display: "flex", flex: "0.8" }}
+      >
+        <div
+          className="video"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <video
+            src={detailedVideo.fileLink}
+            controls
+            height="400px"
+            width="100%"
+          ></video>
+          <div
+            className="detailedVideoPage__videoInfo"
+            style={{
+              display: "flex",
+              padding: "20px",
+              justifyContent: "space-between",
+            }}
+          >
+            <div className="left">
+              <p>{detailedVideo.title}</p>
+              <p>{detailedVideo.description}</p>
+              <p>{detailedVideo.writer?.email}</p>
+            </div>
+            <div className="right">
+              <button>Subscribe</button>
+            </div>
+          </div>
         </div>
+      </div>
+      <div
+        className="detailedVideoPage__side"
+        style={{ display: "flex", flex: "0.2", flexDirection: "column" }}
+      >
+        <p>hello</p>
+        <p>hello</p>
+        <p>hello</p>
+        <p>hello</p>
       </div>
     </div>
   );
