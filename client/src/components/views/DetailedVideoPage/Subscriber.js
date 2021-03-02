@@ -64,8 +64,6 @@ function Subscriber({ userTo, userFrom }) {
     }
   };
 
-  //Delete later
-
   return (
     <div className="subscriber">
       <button
