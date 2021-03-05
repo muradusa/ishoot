@@ -33,6 +33,8 @@ function Subscriber({ userTo, userFrom }) {
       });
   }, []);
 
+  //Delete later
+
   const onSubscribe = () => {
     let subscribeVariables = {
       userTo,
