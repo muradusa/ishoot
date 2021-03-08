@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SideVideo from "./SideVideo";
 import Subscriber from "./Subscriber";
+import Hls from "hls.js";
 
 function DetailedVideoPage(props) {
   const videoId = props.match.params.videoId;
@@ -23,6 +24,20 @@ function DetailedVideoPage(props) {
     });
   }, []);
 
+  var video = document.getElementById("video");
+  var videoSrc =
+    "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8";
+  // if (video.canPlayType("application/vnd.apple.mpegurl")) {
+  //   video.src = videoSrc;
+  //   //
+  //   // If no native HLS support, check if hls.js is supported
+  //   //
+  // } else if (Hls.isSupported()) {
+  //   var hls = new Hls();
+  //   hls.loadSource(videoSrc);
+  //   hls.attachMedia(video);
+  // }
+
   return (
     <div className="detailedVideoPage" style={{ display: "flex" }}>
       <div
@@ -34,7 +49,9 @@ function DetailedVideoPage(props) {
           style={{ display: "flex", flexDirection: "column" }}
         >
           <video
-            src={detailedVideo.fileLink}
+            id="video"
+            // src={detailedVideo.fileLink}
+            src={videoSrc}
             controls
             height="400px"
             width="100%"
