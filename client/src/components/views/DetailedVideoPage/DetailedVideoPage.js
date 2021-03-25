@@ -24,20 +24,6 @@ function DetailedVideoPage(props) {
     });
   }, []);
 
-  // var video = document.getElementById("video");
-  // var videoSrc =
-  //   "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8";
-  // if (video.canPlayType("application/vnd.apple.mpegurl")) {
-  //   video.src = videoSrc;
-  //   //
-  //   // If no native HLS support, check if hls.js is supported
-  //   //
-  // } else if (Hls.isSupported()) {
-  //   var hls = new Hls();
-  //   hls.loadSource(videoSrc);
-  //   hls.attachMedia(video);
-  // }
-
   return (
     <div className="detailedVideoPage" style={{ display: "flex" }}>
       <div

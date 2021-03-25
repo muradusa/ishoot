@@ -6,6 +6,7 @@ var AWS = require("aws-sdk");
 const path = require("path");
 
 const { Video } = require("../models/Video");
+const { Subscriber } = require("../models/Subscriber");
 
 var storage = multer.memoryStorage({});
 
@@ -118,6 +119,28 @@ router.post("/sideVideo", (req, res) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videos });
     });
+});
+
+router.post("/getSubscriptionVideos", (req, res) => {
+  //Need to find all of the Users that I am subscribing to From Subscriber Collection
+
+  Subscriber.find({ userFrom: req.body.userFrom }).exec((err, subscribers) => {
+    if (err) return res.status(400).send(err);
+
+    let subscribedUser = [];
+
+    subscribers.map((subscriber, i) => {
+      subscribedUser.push(subscriber.userTo);
+    });
+
+    //Need to Fetch all of the Videos that belong to the Users that I found in previous step.
+    Video.find({ writer: { $in: subscribedUser } })
+      .populate("writer")
+      .exec((err, videos) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, videos });
+      });
+  });
 });
 
 module.exports = router;
