@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button, Input } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import SingleComment from "./SingleComment";
-import ReplyComment from "./ReplyComment";
+// import SingleComment from "./SingleComment";
+// import ReplyComment from "./ReplyComment";
 const { TextArea } = Input;
 
 function Comments(props) {
@@ -41,7 +41,7 @@ function Comments(props) {
       {/* Comment Lists  */}
       {console.log(props.CommentLists)}
 
-      {props.CommentLists &&
+      {/* {props.CommentLists &&
         props.CommentLists.map(
           (comment, index) =>
             !comment.responseTo && (
@@ -59,7 +59,7 @@ function Comments(props) {
                 />
               </React.Fragment>
             )
-        )}
+        )} */}
 
       {/* Root Comment Form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>

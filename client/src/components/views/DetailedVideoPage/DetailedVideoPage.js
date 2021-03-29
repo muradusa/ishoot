@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SideVideo from "./SideVideo";
 import Subscriber from "./Subscriber";
-import Hls from "hls.js";
+
+import Comments from "./Comments";
 
 function DetailedVideoPage(props) {
   const videoId = props.match.params.videoId;
   const [detailedVideo, setDetailedVideo] = useState([]);
+  const [CommentLists, setCommentLists] = useState([]);
 
   const videoVariable = {
     videoId: videoId,
@@ -23,6 +25,10 @@ function DetailedVideoPage(props) {
       }
     });
   }, []);
+
+  const updateComment = (newComment) => {
+    setCommentLists(CommentLists.concat(newComment));
+  };
 
   return (
     <div className="detailedVideoPage" style={{ display: "flex" }}>
@@ -61,6 +67,11 @@ function DetailedVideoPage(props) {
               />
             </div>
           </div>
+          <Comments
+            CommentLists={CommentLists}
+            postId={detailedVideo._id}
+            refreshFunction={updateComment}
+          />
         </div>
       </div>
       <div
