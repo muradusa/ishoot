@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SideVideo from "./SideVideo";
 import Subscriber from "./Subscriber";
-
+// Delete later
 import Comments from "./Comments";
 
 function DetailedVideoPage(props) {
