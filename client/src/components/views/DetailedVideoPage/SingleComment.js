@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Comment, Avatar, Button, Input } from "antd";
-import Axios from "axios";
+import axios from "axios";
 import { useSelector } from "react-redux";
 // import LikeDislikes from "./LikeDislikes";
 const { TextArea } = Input;
@@ -28,10 +28,10 @@ function SingleComment(props) {
       content: CommentValue,
     };
 
-    Axios.post("/api/comment/saveComment", variables).then((response) => {
+    axios.post("/api/comment/saveComment", variables).then((response) => {
       if (response.data.success) {
         setCommentValue("");
-        // setOpenReply(!OpenReply);
+        setOpenReply(!OpenReply);
         props.refreshFunction(response.data.result);
       } else {
         alert("Failed to save Comment");
