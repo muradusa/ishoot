@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SideVideo from "./SideVideo";
 import Subscriber from "./Subscriber";
-// Delete later
 import Comments from "./Comments";
+import LikeDislikes from "./LikeDislikes";
 
 function DetailedVideoPage(props) {
   const videoId = props.match.params.videoId;
@@ -70,6 +70,10 @@ function DetailedVideoPage(props) {
               <p>{detailedVideo.writer?.email}</p>
             </div>
             <div className="right">
+              <LikeDislikes 
+              video videoId={videoId} 
+              userId={localStorage.getItem('userId')}
+              />
               <Subscriber
                 userTo={detailedVideo.writer?._id}
                 userFrom={localStorage.getItem("userId")}
