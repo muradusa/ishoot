@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Comment, Avatar, Button, Input } from "antd";
+import { Comment, Avatar, } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import LikeDislikes from "./LikeDislikes";
-const { TextArea } = Input;
+import Button from '@material-ui/core/Button';
+import styled from "styled-components"
+
 
 function SingleComment(props) {
   const user = useSelector((state) => state.user);
@@ -58,15 +60,17 @@ function SingleComment(props) {
         avatar={<Avatar src={props.comment.writer.image} alt="image" />}
         content={<p>{props.comment.content}</p>}
       ></Comment>
+   
 
       {OpenReply && (
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
-          <TextArea
+          <input
             style={{ width: "100%", borderRadius: "5px" }}
             onChange={handleChange}
             value={CommentValue}
             placeholder="write some comments"
           />
+        
           <br />
           <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
             Submit
@@ -76,5 +80,6 @@ function SingleComment(props) {
     </div>
   );
 }
+
 
 export default SingleComment;

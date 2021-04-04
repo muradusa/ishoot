@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-let thumb;
+
 
 function UploadVideoPage(props) {
   const user = useSelector((state) => state.user);
@@ -15,7 +15,8 @@ function UploadVideoPage(props) {
   const [Description, setDescription] = useState("");
   const [videoLink, setVideoLink] = useState(null);
   const [thumbLink, setThumbLink] = useState(null);
-  const [thumb, setThumb] = useState(null);
+  const [percentCompleted, setPercentCompleted] = useState("")
+  // let percentComplete = 0;
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -30,10 +31,17 @@ function UploadVideoPage(props) {
     formData.append("file", files[0]);
     const config = {
       header: { "content-type": "multipart/form-data" },
-    };
+      onUploadProgress: function(progressEvent) {
+        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total -10)
+        setPercentCompleted(progress)
+        console.log(progress);
+      } 
+      }
 
     axios.post("/api/video/uploadfiles", formData, config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
+     setPercentCompleted("100")
+     console.log(percentCompleted);
       setVideoLink(res.data.fileUrl);
       setThumbLink(res.data.thumbUrl);
     });
@@ -96,10 +104,13 @@ function UploadVideoPage(props) {
               style={{ height: "300px", objectFit: "contain" }}
               alt="Video Uploaded"
             />
+            
           )}
         </div>
         <br />
+        <progress max="100" value={percentCompleted}></progress>
         <br />
+        
         <label>Title</label>
         <Input onChange={handleChangeTitle} value={title} />
         <br />

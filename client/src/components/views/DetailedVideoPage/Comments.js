@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Input } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
-const { TextArea } = Input;
+import Button from '@material-ui/core/Button';
+
 
 function Comments(props) {
   const user = useSelector((state) => state.user);
@@ -63,7 +63,7 @@ function Comments(props) {
 
       {/* Root Comment Form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <TextArea
+        <input
           style={{ width: "100%", borderRadius: "5px" }}
           onChange={handleChange}
           value={Comment}
