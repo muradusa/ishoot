@@ -3,12 +3,10 @@ import { Typography, Button, Form, message, Input, Icon } from "antd";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import UploadSuccessful from "./Upload Successful.png";
 
 const { Title } = Typography;
 const { TextArea } = Input;
-
-
 
 function UploadVideoPage(props) {
   const user = useSelector((state) => state.user);
@@ -16,8 +14,7 @@ function UploadVideoPage(props) {
   const [Description, setDescription] = useState("");
   const [videoLink, setVideoLink] = useState(null);
   const [thumbLink, setThumbLink] = useState(null);
-  const [percentCompleted, setPercentCompleted] = useState("")
-  
+  const [percentCompleted, setPercentCompleted] = useState("");
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -32,17 +29,19 @@ function UploadVideoPage(props) {
     formData.append("file", files[0]);
     const config = {
       header: { "content-type": "multipart/form-data" },
-      onUploadProgress: function(progressEvent) {
-        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total -10)
-        setPercentCompleted(progress)
+      onUploadProgress: function (progressEvent) {
+        const progress = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total - 10
+        );
+        setPercentCompleted(progress);
         console.log(progress);
-      } 
-      }
+      },
+    };
 
     axios.post("/api/video/uploadfiles", formData, config).then((res) => {
       // console.log(res.data);
-     setPercentCompleted("100")
-     console.log(percentCompleted);
+      setPercentCompleted("100");
+      console.log(percentCompleted);
       setVideoLink(res.data.fileUrl);
       setThumbLink(res.data.thumbUrl);
     });
@@ -100,25 +99,26 @@ function UploadVideoPage(props) {
           </Dropzone>
           {thumbLink !== null && (
             <img
-              src="https://shatter-box.com/wp-content/uploads/2017/10/xcode_app_upload_success.png"
-              // src={`${thumbLink}`}
-              style={{ height: "300px", objectFit: "contain" }}
+              // src="https://shatter-box.com/wp-content/uploads/2017/10/xcode_app_upload_success.png"
+              src={`${UploadSuccessful}`}
+              style={{ height: "200px", objectFit: "contain" }}
               alt="Video Uploaded"
             />
-            
           )}
         </div>
         <br />
-        
-        {percentCompleted ? <progress max="100" value={percentCompleted}></progress> : null} 
-        
+
+        {percentCompleted ? (
+          <progress max="100" value={percentCompleted}></progress>
+        ) : null}
+
         <br />
-        
+
         <label>Title</label>
-       
+
         <Input onChange={handleChangeTitle} value={title} />
         <br />
-        <br /> 
+        <br />
         <label>Description</label>
         <TextArea onChange={handleChangeDescription} value={Description} />
         <br />
