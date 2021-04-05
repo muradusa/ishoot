@@ -4,6 +4,7 @@ const multer = require("multer");
 // var ffmpeg = require("fluent-ffmpeg");
 var AWS = require("aws-sdk");
 const path = require("path");
+const { getVideoDurationInSeconds } = require("get-video-duration");
 
 const { Video } = require("../models/Video");
 const { Subscriber } = require("../models/Subscriber");
@@ -57,6 +58,11 @@ router.post("/uploadfiles", upload, (req, res) => {
         Expires: 5 * 60, //time to expire in seconds - 5 min
       });
       const url = presignedPutUrl.split("?")[0];
+
+      url &&
+        getVideoDurationInSeconds({ url }).then((duration) => {
+          console.log(duration);
+        });
 
       const thumbnailUrl = s3bucket.getSignedUrl("getObject", {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,

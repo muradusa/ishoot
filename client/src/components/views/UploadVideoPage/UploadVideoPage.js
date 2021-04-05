@@ -27,6 +27,7 @@ function UploadVideoPage(props) {
   const onDrop = (files) => {
     let formData = new FormData();
     formData.append("file", files[0]);
+    console.log(files[0]);
     const config = {
       header: { "content-type": "multipart/form-data" },
       onUploadProgress: function (progressEvent) {
