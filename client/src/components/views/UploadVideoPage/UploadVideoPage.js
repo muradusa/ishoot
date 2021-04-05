@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
+
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -16,7 +17,7 @@ function UploadVideoPage(props) {
   const [videoLink, setVideoLink] = useState(null);
   const [thumbLink, setThumbLink] = useState(null);
   const [percentCompleted, setPercentCompleted] = useState("")
-  // let percentComplete = 0;
+  
 
   const handleChangeTitle = (event) => {
     setTitle(event.currentTarget.value);
@@ -108,13 +109,16 @@ function UploadVideoPage(props) {
           )}
         </div>
         <br />
-        <progress max="100" value={percentCompleted}></progress>
+        
+        {percentCompleted ? <progress max="100" value={percentCompleted}></progress> : null} 
+        
         <br />
         
         <label>Title</label>
+       
         <Input onChange={handleChangeTitle} value={title} />
         <br />
-        <br />
+        <br /> 
         <label>Description</label>
         <TextArea onChange={handleChangeDescription} value={Description} />
         <br />
