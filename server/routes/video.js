@@ -15,6 +15,7 @@ var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
   // console.log(req.file);
+let videoDuration; 
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -59,10 +60,20 @@ router.post("/uploadfiles", upload, (req, res) => {
       });
       const url = presignedPutUrl.split("?")[0];
 
-      url &&
-        getVideoDurationInSeconds({ url }).then((duration) => {
-          console.log(duration);
-        });
+      const stringUrl = `${url}`;
+      // console.log(stringUrl);
+
+        if (stringUrl) {
+          getVideoDurationInSeconds(stringUrl)
+          .then((duration) => {
+            videoDuration = duration;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        } 
+
+     
 
       const thumbnailUrl = s3bucket.getSignedUrl("getObject", {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
@@ -72,9 +83,10 @@ router.post("/uploadfiles", upload, (req, res) => {
       const urlThumb = thumbnailUrl.split(".mp4")[0];
       const urlEnding = "-0.jpg";
       const photoUrl = urlThumb.concat(urlEnding);
-
-      console.log(photoUrl);
-
+      // console.log(photoUrl);
+     
+      console.log(videoDuration);
+      
       res.send({
         fileUrl: url,
         thumbUrl: photoUrl,

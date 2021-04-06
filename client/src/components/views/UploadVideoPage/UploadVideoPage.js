@@ -32,7 +32,7 @@ function UploadVideoPage(props) {
       header: { "content-type": "multipart/form-data" },
       onUploadProgress: function (progressEvent) {
         const progress = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total - 10
+          (progressEvent.loaded * 100) / progressEvent.total - 20
         );
         setPercentCompleted(progress);
         console.log(progress);
