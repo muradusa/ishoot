@@ -28,9 +28,9 @@ const videoSchema = mongoose.Schema(
       maxlength: 500,
     },
 
-    // duration :{
-    //     type: String
-    // },
+    duration: {
+      type: String,
+    },
     thumbLink: {
       type: String,
     },

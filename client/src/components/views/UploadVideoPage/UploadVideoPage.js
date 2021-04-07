@@ -14,6 +14,7 @@ function UploadVideoPage(props) {
   const [Description, setDescription] = useState("");
   const [videoLink, setVideoLink] = useState(null);
   const [thumbLink, setThumbLink] = useState(null);
+  const [duration, setDuration] = useState(null);
   const [percentCompleted, setPercentCompleted] = useState("");
 
   const handleChangeTitle = (event) => {
@@ -40,9 +41,9 @@ function UploadVideoPage(props) {
     };
 
     axios.post("/api/video/uploadfiles", formData, config).then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       setPercentCompleted("100");
-      console.log(percentCompleted);
+      setDuration(res.data.duration);
       setVideoLink(res.data.fileUrl);
       setThumbLink(res.data.thumbUrl);
     });
@@ -59,6 +60,7 @@ function UploadVideoPage(props) {
       description: Description,
       videoURL: videoLink,
       thumbURL: thumbLink,
+      duration: duration,
     };
 
     axios.post("/api/video/uploadVideo", variables).then((response) => {

@@ -15,7 +15,6 @@ var upload = multer({ storage: storage }).single("file");
 
 router.post("/uploadfiles", upload, (req, res) => {
   // console.log(req.file);
-let videoDuration; 
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -50,6 +49,7 @@ let videoDuration;
   };
 
   s3bucket.upload(params, function (err, data) {
+    let videoDuration = 0;
     if (err) {
       res.status(500).json({ error: true, Message: err });
     } else {
@@ -63,18 +63,6 @@ let videoDuration;
       const stringUrl = `${url}`;
       // console.log(stringUrl);
 
-        if (stringUrl) {
-          getVideoDurationInSeconds(stringUrl)
-          .then((duration) => {
-            videoDuration = duration;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        } 
-
-     
-
       const thumbnailUrl = s3bucket.getSignedUrl("getObject", {
         Bucket: process.env.AWS_BUCKET_NAME_THUMBNAILS,
         Key: params.Key,
@@ -84,12 +72,14 @@ let videoDuration;
       const urlEnding = "-0.jpg";
       const photoUrl = urlThumb.concat(urlEnding);
       // console.log(photoUrl);
-     
-      console.log(videoDuration);
-      
-      res.send({
-        fileUrl: url,
-        thumbUrl: photoUrl,
+
+      getVideoDurationInSeconds(stringUrl).then((duration) => {
+        videoDuration += duration;
+        res.send({
+          fileUrl: url,
+          thumbUrl: photoUrl,
+          duration: videoDuration,
+        });
       });
     }
   });
@@ -102,6 +92,7 @@ router.post("/uploadVideo", (req, res) => {
     description: req.body.description,
     fileLink: req.body.videoURL,
     thumbLink: req.body.thumbURL,
+    duration: req.body.duration,
   });
   video.save((err, video) => {
     if (err) return res.status(400).json({ success: false, err });
