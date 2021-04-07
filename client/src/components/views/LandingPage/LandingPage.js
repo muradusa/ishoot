@@ -24,12 +24,12 @@ function LandingPage() {
 
   const renderCards = Videos.map((video, index) => {
     console.log(video);
-    // var minutes = Math.floor(video.duration / 60);
-    // var seconds = Math.floor(video.duration - minutes * 60);
+    var minutes = Math.floor(video.duration / 60);
+    var seconds = Math.floor(video.duration - minutes * 60);
 
     return (
       <Col lg={12} md={12} xs={24}>
-        <div style={{ position: "relative" }}></div>
+        <div style={{ position: "relative" }}>{`${minutes}:${seconds}`}</div>
         <br />
         <Meta
           avatar={<Avatar src={video.writer.image} />}
