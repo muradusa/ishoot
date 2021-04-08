@@ -3,11 +3,15 @@ import { Card, Avatar, Col, Typography, Row } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const { Title } = Typography;
 const { Meta } = Card;
 
 function LandingPage() {
+
+  let user = useSelector(state => state.user);
+  console.log(user);
   const [Videos, setVideos] = useState([]);
   let history = useHistory();
 
@@ -23,13 +27,20 @@ function LandingPage() {
   }, []);
 
   const renderCards = Videos.map((video, index) => {
-    console.log(video);
+    // console.log(video);
     var minutes = Math.floor(video.duration / 60);
     var seconds = Math.floor(video.duration - minutes * 60);
 
+
+    if (seconds < 10) {
+      var newSeconds = `0${seconds}`
+    } else {
+      newSeconds = seconds;
+    }
+
     return (
       <Col lg={12} md={12} xs={24}>
-        <div style={{ position: "relative" }}>{`${minutes}:${seconds}`}</div>
+        <div style={{ position: "relative" }}>{`${minutes}:${newSeconds}`}</div>
         <br />
         <Meta
           avatar={<Avatar src={video.writer.image} />}
@@ -52,7 +63,7 @@ function LandingPage() {
 
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
-      <Title level={2}> Recommended </Title>
+      <Title level={2}>{`Recommended Videos for ${user?.userData?.name}`}</Title>
       <hr />
 
       <Row gutter={16}>{renderCards}</Row>
