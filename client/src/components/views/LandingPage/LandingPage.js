@@ -31,7 +31,6 @@ function LandingPage() {
     var minutes = Math.floor(video.duration / 60);
     var seconds = Math.floor(video.duration - minutes * 60);
 
-
     if (seconds < 10) {
       var newSeconds = `0${seconds}`
     } else {
@@ -39,31 +38,41 @@ function LandingPage() {
     }
 
     return (
-      <Col lg={12} md={12} xs={24}>
-        <div style={{ position: "relative" }}>{`${minutes}:${newSeconds}`}</div>
-        <br />
-        <Meta
-          avatar={<Avatar src={video.writer.image} />}
-          title={video.title}
-        />
-        <span>{video.writer.name} </span>
-        <div>{video.description} </div>
-        <br />
-        <div className="video__container" style={{ backgroundColor: "yellow" }}>
+      <Col xxl={6} lg={8} md={12} xs={24}>
+        
+     
+        
+ 
+        <div className="video__container" style={{ backgroundColor: "yellow", position: "relative", }}>
           <a href={`/video/${video._id}`}>
             <img src={video.thumbLink} height="400px" width="100%" alt="" />
           </a>
+          <div style={{ position: "absolute", bottom: "0px", right: "0px", background: "black", color: "white", margin: "5px", padding: "5px", opacity: "0.9"}}>{`${minutes}:${newSeconds}`}</div>
         </div>
-        <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
-        <span> {moment(video.createdAt).format("MMM Do YY")} </span>
-        <br />
+        <div className="video__info">
+          <div>
+          <Avatar src={video.writer.image} />
+          <span>{video.title} </span>
+          </div>
+          <div>
+            {video.description} 
+            <span> {moment(video.createdAt).format("MMM Do YY")} </span>
+            <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
+            </div>
+        </div>
+
+       
+        
+       
+        
+        
       </Col>
     );
   });
 
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
-      <Title level={2}>{`Recommended Videos for ${user?.userData?.name}`}</Title>
+      <Title level={2}>{user?.userData?.name === undefined ? `Please wait while we load your videos ....` : `Recommended Videos for ${user?.userData?.name}` }</Title>
       <hr />
 
       <Row gutter={16}>{renderCards}</Row>
