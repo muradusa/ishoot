@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const { Title } = Typography;
 const { Meta } = Card;
 
-function LandingPage() {
+const LandingPage = () => {
 
   let user = useSelector(state => state.user);
   console.log(user);
@@ -39,40 +39,33 @@ function LandingPage() {
 
     return (
       <Col xxl={6} lg={8} md={12} xs={24}>
-        
-     
-        
- 
-        <div className="video__container" style={{ backgroundColor: "yellow", position: "relative", }}>
+        <div style={{ position: "relative", height: "400px", width: "auto", }} className="video__container"  >
           <a href={`/video/${video._id}`}>
-            <img src={video.thumbLink} height="400px" width="100%" alt="" />
+            <img src={video.thumbLink} height="400px" width="400px" style={{ objectFit: "contain" }} alt="" />
           </a>
-          <div style={{ position: "absolute", bottom: "0px", right: "0px", background: "black", color: "white", margin: "5px", padding: "5px", opacity: "0.9"}}>{`${minutes}:${newSeconds}`}</div>
+          <div style={{ position: "absolute", bottom: "0px", right: "0px", background: "black", color: "white", margin: "5px", padding: "5px", opacity: "0.9" }}>{`${minutes}:${newSeconds}`}</div>
         </div>
         <div className="video__info">
-          <div>
-          <Avatar src={video.writer.image} />
-          <span>{video.title} </span>
+          <div style={{ padding: "5px" }}>
+            <Avatar src={video.writer.image} />
+            <span style={{ marginLeft: "5px" }}>{video.title} </span>
           </div>
-          <div>
-            {video.description} 
-            <span> {moment(video.createdAt).format("MMM Do YY")} </span>
-            <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "}
+          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: "10px" }}>
+            {/* <span>{video.description} </span> */}
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ marginLeft: "5px" }}>{video.writer.name}</span>
+              <span> {moment(video.createdAt).format("MMM Do YY")} </span>
             </div>
+            {/* <span style={{ marginLeft: "3rem" }}> {video.views}</span>-{" "} */}
+          </div>
         </div>
-
-       
-        
-       
-        
-        
       </Col>
     );
   });
 
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
-      <Title level={2}>{user?.userData?.name === undefined ? `Please wait while we load your videos ....` : `Recommended Videos for ${user?.userData?.name}` }</Title>
+      <Title level={2}>{user?.userData?.name === undefined ? `Please wait while we load your videos ....` : `Recommended Videos for ${user?.userData?.name}`}</Title>
       <hr />
 
       <Row gutter={16}>{renderCards}</Row>

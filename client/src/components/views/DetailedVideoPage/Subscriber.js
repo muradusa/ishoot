@@ -67,7 +67,7 @@ function Subscriber({ userTo, userFrom }) {
   };
 
   return (
-    <div className="subscriber">
+    <div className="subscriber" style={{ margintTop: "10px" }}>
       <button
         onClick={onSubscribe}
         style={{
@@ -76,7 +76,7 @@ function Subscriber({ userTo, userFrom }) {
         }}
       >
         {" "}
-        <span>{subscribeNumber}</span> {subscribed ? "Subscribed" : "Subscribe"}
+        <span>{subscribeNumber}</span> {subscribed ? "Subscribed" : `Subscribe`}
       </button>
     </div>
   );

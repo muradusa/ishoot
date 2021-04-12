@@ -60,20 +60,36 @@ function DetailedVideoPage(props) {
             className="detailedVideoPage__videoInfo"
             style={{
               display: "flex",
-              padding: "20px",
+              padding: "10px",
               justifyContent: "space-between",
+
+              backgroundColor: "yellow",
             }}
           >
             <div className="left">
               <p>{detailedVideo.title}</p>
               <p>{detailedVideo.description}</p>
-              <p>{detailedVideo.writer?.email}</p>
+              <p>
+                <b>{detailedVideo.writer?.name}</b>
+              </p>
             </div>
-            <div className="right">
-              <LikeDislikes 
-              video videoId={videoId} 
-              userId={localStorage.getItem('userId')}
-              />
+            <div
+              className="right"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <LikeDislikes
+                  style={{ display: "flex" }}
+                  video
+                  videoId={videoId}
+                  userId={localStorage.getItem("userId")}
+                />
+              </div>
+
               <Subscriber
                 userTo={detailedVideo.writer?._id}
                 userFrom={localStorage.getItem("userId")}
