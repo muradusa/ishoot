@@ -62,28 +62,31 @@ function DetailedVideoPage(props) {
               display: "flex",
               padding: "10px",
               justifyContent: "space-between",
-
-              backgroundColor: "yellow",
             }}
           >
             <div className="left">
-              <p>{detailedVideo.title}</p>
-              <p>{detailedVideo.description}</p>
-              <p>
-                <b>{detailedVideo.writer?.name}</b>
+              <p style={{ fontWeight: "500", fontSize: "18px" }}>
+                {detailedVideo.title}
               </p>
+              <p style={{ fontStyle: "italic", fontSize: "18px" }}>
+                {detailedVideo.description}
+              </p>
+              <p style={{ fontSize: "20px" }}>{detailedVideo.writer?.name}</p>
             </div>
             <div
               className="right"
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
               }}
             >
               <div>
                 <LikeDislikes
-                  style={{ display: "flex" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                  }}
                   video
                   videoId={videoId}
                   userId={localStorage.getItem("userId")}

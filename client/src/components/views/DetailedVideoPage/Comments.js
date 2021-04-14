@@ -3,8 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
-import Button from '@material-ui/core/Button';
-
+import Button from "@material-ui/core/Button";
 
 function Comments(props) {
   const user = useSelector((state) => state.user);
@@ -35,8 +34,10 @@ function Comments(props) {
 
   return (
     <div>
-      <br />
-      <p> replies</p>
+      <p style={{ paddingLeft: "10px", fontSize: "20px", fontWeight: "500" }}>
+        {" "}
+        Replies
+      </p>
       <hr />
       {/* Comment Lists  */}
       {console.log(props.CommentLists)}
@@ -62,9 +63,20 @@ function Comments(props) {
         )}
 
       {/* Root Comment Form */}
-      <form style={{ display: "flex" }} onSubmit={onSubmit}>
+      <form
+        style={{ display: "flex", paddingLeft: "10px", fontSize: "18px" }}
+        onSubmit={onSubmit}
+      >
         <input
-          style={{ width: "100%", borderRadius: "5px" }}
+          style={{
+            marginLeft: "20px",
+            padding: "5px",
+            width: "100%",
+            borderRadius: "5px",
+            backgroundColor: "#dedede",
+            border: "none",
+            outline: "none",
+          }}
           onChange={handleChange}
           value={Comment}
           placeholder="write some comments"

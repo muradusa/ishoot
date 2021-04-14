@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Comment, Avatar, } from "antd";
+import { Comment, Avatar } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import LikeDislikes from "./LikeDislikes";
-import Button from '@material-ui/core/Button';
-import styled from "styled-components"
-
+import Button from "@material-ui/core/Button";
+import styled from "styled-components";
 
 function SingleComment(props) {
   const user = useSelector((state) => state.user);
@@ -47,7 +46,11 @@ function SingleComment(props) {
       commentId={props.comment._id}
       userId={localStorage.getItem("userId")}
     />,
-    <span onClick={openReply} key="comment-basic-reply-to">
+    <span
+      style={{ fontSize: "18px" }}
+      onClick={openReply}
+      key="comment-basic-reply-to"
+    >
       Reply to{" "}
     </span>,
   ];
@@ -56,21 +59,38 @@ function SingleComment(props) {
     <div>
       <Comment
         actions={actions}
-        author={props.comment.writer.name}
-        avatar={<Avatar src={props.comment.writer.image} alt="image" />}
-        content={<p>{props.comment.content}</p>}
+        author={
+          <p style={{ fontSize: "18px", fontWeight: "500" }}>
+            {props.comment.writer.name}
+          </p>
+        }
+        avatar={
+          <Avatar
+            style={{ fontSize: "18px" }}
+            src={props.comment.writer.image}
+            alt="image"
+          />
+        }
+        content={<p style={{ fontSize: "18px" }}>{props.comment.content}</p>}
       ></Comment>
-   
 
       {OpenReply && (
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
           <input
-            style={{ width: "100%", borderRadius: "5px" }}
+            style={{
+              marginLeft: "30px",
+              padding: "5px",
+              width: "100%",
+              borderRadius: "5px",
+              backgroundColor: "#dedede",
+              border: "none",
+              outline: "none",
+            }}
             onChange={handleChange}
             value={CommentValue}
             placeholder="write some comments"
           />
-        
+
           <br />
           <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
             Submit
@@ -80,6 +100,5 @@ function SingleComment(props) {
     </div>
   );
 }
-
 
 export default SingleComment;
