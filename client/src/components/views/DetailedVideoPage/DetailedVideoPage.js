@@ -4,6 +4,7 @@ import SideVideo from "./SideVideo";
 import Subscriber from "./Subscriber";
 import Comments from "./Comments";
 import LikeDislikes from "./LikeDislikes";
+import "./DetailedVideoPage.css";
 
 function DetailedVideoPage(props) {
   const videoId = props.match.params.videoId;

@@ -56,7 +56,13 @@ function SingleComment(props) {
   ];
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "rgb(240, 243, 243)",
+        padding: "10px",
+        borderRadius: "10px",
+      }}
+    >
       <Comment
         actions={actions}
         author={
@@ -78,11 +84,13 @@ function SingleComment(props) {
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
           <input
             style={{
-              marginLeft: "30px",
+              marginLeft: "40px",
+              marginRight: "15px",
+              marginBottom: "15px",
               padding: "5px",
               width: "100%",
               borderRadius: "5px",
-              backgroundColor: "#dedede",
+              backgroundColor: "rgb(232, 248, 221)",
               border: "none",
               outline: "none",
             }}
@@ -92,7 +100,14 @@ function SingleComment(props) {
           />
 
           <br />
-          <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+          <Button
+            style={{
+              width: "20%",
+              height: "52px",
+              backgroundColor: "rgb(221, 250, 201)",
+            }}
+            onClick={onSubmit}
+          >
             Submit
           </Button>
         </form>

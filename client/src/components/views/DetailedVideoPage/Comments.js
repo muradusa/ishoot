@@ -33,7 +33,7 @@ function Comments(props) {
   };
 
   return (
-    <div>
+    <div style={{ padding: "10px", borderRadius: "10px" }}>
       <p style={{ paddingLeft: "10px", fontSize: "20px", fontWeight: "500" }}>
         {" "}
         Replies
@@ -64,16 +64,20 @@ function Comments(props) {
 
       {/* Root Comment Form */}
       <form
-        style={{ display: "flex", paddingLeft: "10px", fontSize: "18px" }}
+        style={{
+          display: "flex",
+          paddingLeft: "10px",
+          fontSize: "18px",
+          marginTop: "10px",
+        }}
         onSubmit={onSubmit}
       >
         <input
           style={{
-            marginLeft: "20px",
-            padding: "5px",
+            padding: "5px 0px 0px 20px ",
             width: "100%",
             borderRadius: "5px",
-            backgroundColor: "#dedede",
+            backgroundColor: "rgb(228, 246, 250",
             border: "none",
             outline: "none",
           }}
@@ -82,7 +86,14 @@ function Comments(props) {
           placeholder="write some comments"
         />
         <br />
-        <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+        <Button
+          style={{
+            width: "20%",
+            height: "52px",
+            backgroundColor: "rgb(202, 231, 238)",
+          }}
+          onClick={onSubmit}
+        >
           Submit
         </Button>
       </form>

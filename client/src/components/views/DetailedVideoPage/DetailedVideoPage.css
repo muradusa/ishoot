@@ -1,0 +1,11 @@
+@media screen and (max-width: 700px) {
+  .detailedVideoPage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detailedVideoPage__side {
+    width: 100%;
+    /* background-color: yellow; */
+  }
+}
