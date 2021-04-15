@@ -6,6 +6,7 @@ require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
+const wakeUpDyno = require("./wokeDyno");
 
 const mongoose = require("mongoose");
 const connect = mongoose
@@ -51,7 +52,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 5000;
+const DYNO_URL = "https://stormy-shelf-52887.herokuapp.com/";
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
+  wakeUpDyno(DYNO_URL);
 });
