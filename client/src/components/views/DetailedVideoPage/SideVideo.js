@@ -36,9 +36,11 @@ function SideVideo({ writer }) {
       <Col xs={24}>
         <div
           style={{
-            maxWidth: "400px",
+            maxWidth: "600px",
             alignItems: "center",
             backgroundColor: "rgb(243, 250, 252)",
+            marginRight: "auto",
+            marginLeft: "auto",
           }}
         >
           <a href={`/video/${video._id}`}>
@@ -48,7 +50,8 @@ function SideVideo({ writer }) {
                 backgroundImage: `url(${video.thumbLink})`,
                 height: "250px",
                 width: "auto",
-                maxWidth: "400px",
+                maxWidth: "600px",
+
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 objectFit: "contain",
@@ -99,7 +102,11 @@ function SideVideo({ writer }) {
 
     // )
     <div
-      style={{ backgroundColor: "rgb(243, 250, 252)" }}
+      style={{
+        backgroundColor: "rgb(243, 250, 252)",
+        display: "flex",
+        flex: "1",
+      }}
       className="sideVideo"
     >
       {renderCards}

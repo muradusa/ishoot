@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import LikeDislikes from "./LikeDislikes";
 import Button from "@material-ui/core/Button";
-import styled from "styled-components";
+import sprig from "./sprig.png";
 
 function SingleComment(props) {
   const user = useSelector((state) => state.user);
@@ -61,20 +61,21 @@ function SingleComment(props) {
         backgroundColor: "rgb(240, 243, 243)",
         padding: "10px",
         borderRadius: "10px",
+        marginBottom: "20px",
       }}
     >
       <Comment
         actions={actions}
         author={
           <p style={{ fontSize: "16px", fontWeight: "500" }}>
-            {props.comment?.writer?.name}
+            {props.comment?.writer?.name || "New User"}
           </p>
         }
         avatar={
           <Avatar
             style={{ fontSize: "16px" }}
-            src={props.comment?.writer?.image}
-            alt="image"
+            src={props.comment?.writer?.image || sprig}
+            alt={sprig}
           />
         }
         content={<p style={{ fontSize: "16px" }}>{props.comment.content}</p>}
