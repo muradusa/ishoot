@@ -66,8 +66,10 @@ function DetailedVideoPage(props) {
           <video
             id="video"
             src={detailedVideo.fileLink}
+            poster={detailedVideo.thumbLink}
+            style={{ objectFit: "cover" }}
             controls
-            height="400px"
+            height="600px"
             width="100%"
           ></video>
           <div
