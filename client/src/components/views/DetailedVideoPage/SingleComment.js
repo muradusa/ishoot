@@ -47,7 +47,7 @@ function SingleComment(props) {
       userId={localStorage.getItem("userId")}
     />,
     <span
-      style={{ fontSize: "18px" }}
+      style={{ fontSize: "16px" }}
       onClick={openReply}
       key="comment-basic-reply-to"
     >
@@ -66,18 +66,18 @@ function SingleComment(props) {
       <Comment
         actions={actions}
         author={
-          <p style={{ fontSize: "18px", fontWeight: "500" }}>
-            {props.comment.writer.name}
+          <p style={{ fontSize: "16px", fontWeight: "500" }}>
+            {props.comment?.writer?.name}
           </p>
         }
         avatar={
           <Avatar
-            style={{ fontSize: "18px" }}
-            src={props.comment.writer.image}
+            style={{ fontSize: "16px" }}
+            src={props.comment?.writer?.image}
             alt="image"
           />
         }
-        content={<p style={{ fontSize: "18px" }}>{props.comment.content}</p>}
+        content={<p style={{ fontSize: "16px" }}>{props.comment.content}</p>}
       ></Comment>
 
       {OpenReply && (

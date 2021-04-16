@@ -34,7 +34,7 @@ function Comments(props) {
 
   return (
     <div style={{ padding: "10px", borderRadius: "10px" }}>
-      <p style={{ paddingLeft: "10px", fontSize: "20px", fontWeight: "500" }}>
+      <p style={{ paddingLeft: "10px", fontSize: "18px", fontWeight: "500" }}>
         {" "}
         Replies
       </p>
@@ -67,7 +67,7 @@ function Comments(props) {
         style={{
           display: "flex",
           paddingLeft: "10px",
-          fontSize: "18px",
+          fontSize: "16px",
           marginTop: "10px",
         }}
         onSubmit={onSubmit}

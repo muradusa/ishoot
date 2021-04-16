@@ -43,11 +43,10 @@ const LandingPage = () => {
             <div
               style={{
                 position: "relative",
-                height: "400px",
+                height: "300px",
                 width: "auto",
                 backgroundImage: `url(${video.thumbLink})`,
-                height: "400px",
-                width: "auto",
+
                 maxWidth: "600px",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

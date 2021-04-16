@@ -41,14 +41,27 @@ function DetailedVideoPage(props) {
   };
 
   return (
-    <div className="detailedVideoPage" style={{ display: "flex" }}>
+    <div
+      className="detailedVideoPage"
+      style={{
+        display: "flex",
+        marginTop: "50px",
+        backgroundColor: "rgb(243, 250, 252)",
+      }}
+    >
       <div
         className="detailedVideoPage__video"
         style={{ display: "flex", flex: "0.8" }}
       >
         <div
           className="video"
-          style={{ display: "flex", flexDirection: "column" }}
+          style={{
+            display: "flex",
+            flex: "1",
+            flexDirection: "column",
+            padding: "10px",
+            backgroundColor: "rgb(243, 250, 252)",
+          }}
         >
           <video
             id="video"
@@ -109,7 +122,12 @@ function DetailedVideoPage(props) {
       </div>
       <div
         className="detailedVideoPage__side"
-        style={{ display: "flex", flex: "0.2", flexDirection: "column" }}
+        style={{
+          display: "flex",
+          flex: "0.2",
+          flexDirection: "column",
+          backgroundColor: "rgb(243, 250, 252)",
+        }}
       >
         <SideVideo writer={detailedVideo.writer} />
       </div>

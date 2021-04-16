@@ -38,7 +38,7 @@ function SideVideo({ writer }) {
           style={{
             maxWidth: "400px",
             alignItems: "center",
-            backgroundColor: "white",
+            backgroundColor: "rgb(243, 250, 252)",
           }}
         >
           <a href={`/video/${video._id}`}>
@@ -98,7 +98,12 @@ function SideVideo({ writer }) {
     // writerVideos.length > 0 && (
 
     // )
-    <div className="sideVideo">{renderCards}</div>
+    <div
+      style={{ backgroundColor: "rgb(243, 250, 252)" }}
+      className="sideVideo"
+    >
+      {renderCards}
+    </div>
   );
 }
 

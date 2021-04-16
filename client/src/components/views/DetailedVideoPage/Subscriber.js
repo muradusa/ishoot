@@ -74,10 +74,10 @@ function Subscriber({ userTo, userFrom }) {
           backgroundColor: `${subscribed ? "gray" : "red"}`,
           color: "white",
           outline: "none",
-          fontSize: "20px",
+          fontSize: "18px",
           borderRadius: "5px",
           borderColor: "white",
-          padding: "5px",
+          padding: "5px 10px",
         }}
       >
         {" "}
